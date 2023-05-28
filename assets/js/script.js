@@ -55,9 +55,17 @@ var handleSearch = function (event) {
                         })
                         .then(function (data) {
                             console.log(data);
+                            var fiveDayHeaderEl = document.createElement('h2');
+                            fiveDayHeaderEl.textContent = '5-Day Forecast:';
+
+                            document.querySelector('.card-container-class').append(fiveDayHeaderEl);
+
 
                             for (let i = 0; i < 40; i += 8) {
                                 var temp = data.list[i].main.temp;
+                                var wind = data.list[i].wind.speed;
+                                var humidity = data.list[i].main.humidity;
+                                var icon = data.list[i].weather[0].icon;
 
                                 var cardTitleEl = document.createElement('h5');
                                 var cardIcon = document.createElement('img');
@@ -76,12 +84,16 @@ var handleSearch = function (event) {
                                 cardEl.className = 'card mx-1';
 
                                 cardTitleEl.textContent = dayjs(data.list[i].dt_txt).format('dddd');
-                                cardIcon.setAttribute('src', `https://openweathermap.org/img/wn/${data.list[i].weather[0].icon}.png`)
-                                cardTempEl.textContent = `Temp: *F`;
+                                cardIcon.setAttribute('src', `https://openweathermap.org/img/wn/${icon}.png`)
+                                cardTempEl.textContent = `Temp: ${temp} *F`;
                                 cardWindEl.textContent = `Wind: `;
                                 cardHumidityEl.textContent = `Humidity: %`;
 
-                                cardBodyEl.appendChild(cardTitleEl, cardIcon, cardTempEl, cardWindEl, cardHumidityEl);
+                                cardBodyEl.appendChild(cardTitleEl)
+                                cardBodyEl.appendChild(cardTempEl)
+                                cardBodyEl.appendChild(cardWindEl)
+                                cardBodyEl.appendChild(cardHumidityEl)
+                                cardBodyEl.appendChild(cardIcon)
                                 cardEl.appendChild(cardBodyEl);
                                 document.querySelector('.card-group').appendChild(cardEl);
 
