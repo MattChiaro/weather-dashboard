@@ -17,7 +17,7 @@ var handleSearch = function (event) {
     var geoApiUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${q}&appid=${apiKey}`
 
 
-
+    //fetch geo api to turn the city name into lat and lon coordinates
     fetch(geoApiUrl)
         .then(function (response) {
             return response.json();
@@ -29,6 +29,7 @@ var handleSearch = function (event) {
 
             var weatherApiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey}`
 
+            //using lat and lon coord, fetch the weather api to get current weather data and display it on the page in main card.
             fetch(weatherApiUrl)
                 .then(function (response) {
                     return response.json();
@@ -49,18 +50,26 @@ var handleSearch = function (event) {
 
                     var fiveDayApiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey}`
 
+                    //use same lat and lon to fetch the 5day/3hour api to get future weather data.
                     fetch(fiveDayApiUrl)
                         .then(function (response) {
                             return response.json();
+                            
+
                         })
                         .then(function (data) {
                             console.log(data);
-                            var fiveDayHeaderEl = document.createElement('h2');
-                            fiveDayHeaderEl.textContent = '5-Day Forecast:';
-
-                            document.querySelector('.card-container-class').append(fiveDayHeaderEl);
 
 
+                            // Dynamically displays  '5 Day Forecast' header
+                            var fiveDayHeaderEl =  document.querySelector('.five-day-header');
+                            
+                            fiveDayHeaderEl.classList.remove('d-none');
+                            fiveDayHeaderEl.className = 'd-block';
+
+
+                        
+                            //increments by 8, since there are 40 responses for the api call - 8 per day. This pulls 5 different days spaced 24 hours apart. Dynamically creates cards for each day with their respective information.
                             for (let i = 0; i < 40; i += 8) {
                                 var temp = data.list[i].main.temp;
                                 var wind = data.list[i].wind.speed;
@@ -111,4 +120,6 @@ var handleSearch = function (event) {
         })
 }
 
+
+//respond to submit click on search form.
 searchForm.addEventListener('submit', handleSearch);
