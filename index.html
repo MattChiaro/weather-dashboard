@@ -23,15 +23,14 @@
 
     <!-- ROW ONE - SEARCH AND MAIN CARD -->
     <div class="container row justify-content-around mb-4">
-        <form class="col-12 col-lg-3">
+        <form id= "city-search" class="col-12 col-lg-3">
             <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">
+                <label class="form-label">
                     <h5>Search for a City:</h5>
                 </label>
-                <input type="text" class="form-control" id="exampleInputEmail1">
-                <div id="emailHelp" class="form-text">Enter a city in the field above</div>
+                <input type="text" name="q" id="q" class="form-control">
+                <div class="form-text">Enter a city in the field above</div>
             </div>
-
             <button type="submit" class="btn btn-primary w-100">Search</button>
         </form>
 
