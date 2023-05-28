@@ -6,6 +6,7 @@ var currentTempEl = document.querySelector('#current-temp')
 var currentFeelsLikeEl = document.querySelector('#current-feels-like')
 var currentHumidityEl = document.querySelector('#current-humidity')
 var currentDescriptionEl = document.querySelector('#current-description')
+var currentIconImageEl = document.querySelector('#current-icon-image')
 
 
 var handleSearch = function(event) {
@@ -38,12 +39,10 @@ var handleSearch = function(event) {
                 var currentFeelsLike = data.main.feels_like;
                 var currentHumidity = data.main.humidity;
                 var currentDescription = data.weather[0].description.toString();
+                var iconCode = data.weather[0].icon
+                var iconImage = `https://openweathermap.org/img/wn/${iconCode}@2x.png`
 
-                
-
-
-
-
+                currentIconImageEl.setAttribute('src', iconImage)
                 cityNameEl.textContent = `Current Weather for: ${currentCity}`;
                 currentTempEl.textContent = `Temp: ${currentTemp}*F`;
                 currentFeelsLikeEl.textContent = `Feels Like: ${currentFeelsLike}*F`;
