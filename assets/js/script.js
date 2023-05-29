@@ -6,6 +6,8 @@ var currentTempEl = document.querySelector('#current-temp')
 var currentWindSpeedEl = document.querySelector('#current-wind-speed')
 var currentHumidityEl = document.querySelector('#current-humidity')
 var currentIconImageEl = document.querySelector('#current-icon-image')
+var searchHistory = document.querySelector('#search-history')
+
 
 
 var handleSearch = function (event) {
@@ -13,7 +15,18 @@ var handleSearch = function (event) {
 
     var q = qInput.value.trim();
 
+    function searchHistory() {
 
+        var searchHistory = JSON.parse(localStorage.getItem('searchHistory')) || [];
+        if (searchHistory.indexOf(q) === -1) {
+            searchHistory.push(q)
+        }
+        localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
+
+    }
+
+
+    searchHistory();
     var geoApiUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${q}&appid=${apiKey}`
 
 
@@ -54,20 +67,14 @@ var handleSearch = function (event) {
                     fetch(fiveDayApiUrl)
                         .then(function (response) {
                             return response.json();
-                            
-
                         })
                         .then(function (data) {
-                            console.log(data);
-
 
                             // Dynamically displays  '5 Day Forecast' header
-                            var fiveDayHeaderEl =  document.querySelector('.five-day-header');
-                            
-                            fiveDayHeaderEl.classList.remove('d-none');
-                            fiveDayHeaderEl.className = 'd-block';
-
-
+                            var fiveDayHeaderEl = document.querySelector('#five-day-header');
+        
+                                fiveDayHeaderEl.className = '';
+                                fiveDayHeaderEl.className = 'd-block';
                         
                             //increments by 8, since there are 40 responses for the api call - 8 per day. This pulls 5 different days spaced 24 hours apart. Dynamically creates cards for each day with their respective information.
                             for (let i = 0; i < 40; i += 8) {
