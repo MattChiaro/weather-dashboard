@@ -36,15 +36,15 @@ var handleSearch = function (event) {
                 })
                 .then(function (data) {
                     var currentCity = data.name;
-                    var currentTemp = data.main.temp;
-                    var currentWindSpeed = data.wind.speed;
+                    var currentTemp = Math.round(data.main.temp);
+                    var currentWindSpeed = Math.round(data.wind.speed);
                     var currentHumidity = data.main.humidity;
                     var iconCode = data.weather[0].icon
                     var iconImage = `https://openweathermap.org/img/wn/${iconCode}@2x.png`
 
                     currentIconImageEl.setAttribute('src', iconImage)
                     cityNameEl.textContent = `Current Weather for: ${currentCity}, ${state}`;
-                    currentTempEl.textContent = `Temp: ${currentTemp}*F`;
+                    currentTempEl.textContent = `Temp: ${currentTemp} \u00B0F`;
                     currentWindSpeedEl.textContent = `Wind Speed: ${currentWindSpeed} MPH`;
                     currentHumidityEl.textContent = `Humidity: ${currentHumidity}%`;
 
@@ -71,8 +71,8 @@ var handleSearch = function (event) {
                         
                             //increments by 8, since there are 40 responses for the api call - 8 per day. This pulls 5 different days spaced 24 hours apart. Dynamically creates cards for each day with their respective information.
                             for (let i = 0; i < 40; i += 8) {
-                                var temp = data.list[i].main.temp;
-                                var wind = data.list[i].wind.speed;
+                                var temp = Math.round(data.list[i].main.temp);
+                                var wind = Math.round(data.list[i].wind.speed);
                                 var humidity = data.list[i].main.humidity;
                                 var icon = data.list[i].weather[0].icon;
 
@@ -94,9 +94,9 @@ var handleSearch = function (event) {
 
                                 cardTitleEl.textContent = dayjs(data.list[i].dt_txt).format('dddd');
                                 cardIcon.setAttribute('src', `https://openweathermap.org/img/wn/${icon}.png`)
-                                cardTempEl.textContent = `Temp: ${temp} *F`;
-                                cardWindEl.textContent = `Wind: `;
-                                cardHumidityEl.textContent = `Humidity: %`;
+                                cardTempEl.textContent = `Temp: ${temp} \u00B0F`;
+                                cardWindEl.textContent = `Wind: ${wind} MPH`;
+                                cardHumidityEl.textContent = `Humidity: ${humidity}%`;
 
                                 cardBodyEl.appendChild(cardTitleEl)
                                 cardBodyEl.appendChild(cardTempEl)
