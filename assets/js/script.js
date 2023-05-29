@@ -17,17 +17,14 @@ function displaySearchHistory() {
 
     var searchHistoryHeaderEl = document.querySelector('#search-history-header')
 
-    if (searchHistory !== []) {
 
-        searchHistoryHeaderEl.className = '';
-        searchHistoryHeaderEl.className = 'd-block';
-    }
 
     for (let i = 0; i < searchHistory.length; i++) {
         var searchHistoryItem = document.createElement('a')
         searchHistoryItem.className = 'list-group-item list-group-item-action'
         searchHistoryItem.textContent = searchHistory[i]
         searchHistoryEl.appendChild(searchHistoryItem)
+        searchHistoryHeaderEl.className = 'd-block';
 
     }
 }
