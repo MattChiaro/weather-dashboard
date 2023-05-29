@@ -23,12 +23,6 @@ function displaySearchHistory() {
     }
 }
 
-function displayFromHistory() {
-
-
-
-}
-
 
 function search() {
 
@@ -36,7 +30,7 @@ function search() {
 
         //if item is not currently saved to localStorage, save it. Prevents reloading of duplicate items if item is re-searched as opposed to clicked.
 
-        if (searchHistory.indexOf(q) === -1) {
+        if ((searchHistory.indexOf(q) === -1) && (q !== '')) {
             searchHistory.push(q)
         }
 
@@ -161,6 +155,10 @@ var newSearch = function (event) {
 }
 
 
+
+
 //respond to submit click on search form.
+
 displaySearchHistory();
 searchForm.addEventListener('submit', newSearch);
+searchHistoryEl.addEventListener('click', function (event) {console.log('clicked ' + event.target.innerText)});
