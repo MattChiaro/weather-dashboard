@@ -8,6 +8,19 @@ var currentHumidityEl = document.querySelector('#current-humidity')
 var currentIconImageEl = document.querySelector('#current-icon-image')
 var searchHistoryEl = document.querySelector('#search-history')
 
+var searchHistory = JSON.parse(localStorage.getItem('searchHistory')) || [];
+
+function displaySearchHistory() {
+
+    for (let i = 0; i < searchHistory.length; i++) {
+        var searchHistoryItem = document.createElement('a')
+        searchHistoryItem.className = 'list-group-item list-group-item-action'
+        searchHistoryItem.textContent = searchHistory[i]
+        searchHistoryEl.appendChild(searchHistoryItem)
+
+    }
+}
+
 
 
 var handleSearch = function (event) {
@@ -15,11 +28,10 @@ var handleSearch = function (event) {
 
     var q = qInput.value.trim();
 
-    function searchHistory() {
+    function generateSearchHistory() {
 
         //if item is not currently saved to localStorage, save it. Prevents reloading of duplicate items if item is re-searched as opposed to clicked.
 
-        var searchHistory = JSON.parse(localStorage.getItem('searchHistory')) || [];
         if (searchHistory.indexOf(q) === -1) {
             searchHistory.push(q)
         }
@@ -28,21 +40,11 @@ var handleSearch = function (event) {
 
         searchHistoryEl.innerHTML = '';
 
-        function displaySearchHistory() {
-
-        for (let i = 0; i < searchHistory.length; i++) {
-            var searchHistoryItem = document.createElement('a')
-            searchHistoryItem.className = 'list-group-item list-group-item-action'
-            searchHistoryItem.textContent = searchHistory[i]
-            searchHistoryEl.appendChild(searchHistoryItem)
-
-        }
-    }
     displaySearchHistory();
     }
 
 
-        searchHistory();
+        generateSearchHistory();
         var geoApiUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${q}&appid=${apiKey}`
 
 
@@ -147,4 +149,5 @@ var handleSearch = function (event) {
 
 
     //respond to submit click on search form.
+    displaySearchHistory();
     searchForm.addEventListener('submit', handleSearch);
