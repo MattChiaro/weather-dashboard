@@ -54,7 +54,7 @@ function search() {
 
 
     generateSearchHistory();
-    var geoApiUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${q}&appid=${apiKey}`
+    var geoApiUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${q}&appid=${apiKey}`
 
 
     //fetch geo api to turn the city name into lat and lon coordinates
