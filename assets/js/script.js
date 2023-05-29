@@ -142,7 +142,7 @@ function search() {
                                 document.querySelector('.card-group').appendChild(cardEl);
 
                                 //change card background-color based on selected temperature rules
-                                if (temp > 80) {
+                                if (temp >= 80) {
                                     cardBodyEl.className = 'card-body hot';
                                 } else if (temp >= 70 && temp < 80) {
                                     cardBodyEl.className = 'card-body warm';
