@@ -8,7 +8,6 @@ var currentHumidityEl = document.querySelector('#current-humidity')
 var currentIconImageEl = document.querySelector('#current-icon-image')
 var searchHistoryEl = document.querySelector('#search-history')
 var q = '';
-var bigCard = document.querySelector('#big-card')
 
 var searchHistory = JSON.parse(localStorage.getItem('searchHistory')) || [];
 
