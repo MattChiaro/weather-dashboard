@@ -36,6 +36,8 @@ function search() {
 
         localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
 
+        //clear search history element to prevent duplicates
+
         searchHistoryEl.innerHTML = '';
 
         displaySearchHistory();
@@ -86,6 +88,7 @@ function search() {
                         })
                         .then(function (data) {
 
+                            //clears the card group element to prevent duplicates
                             document.querySelector('.card-group').innerHTML = '';
 
                             // Dynamically displays  '5 Day Forecast' header
@@ -154,6 +157,11 @@ var newSearch = function (event) {
 
 }
 
+function displayFromHistory(event) {
+    q = event.target.innerText;
+    event.target.ClassName = 'active';
+    search();
+}
 
 
 
@@ -161,4 +169,4 @@ var newSearch = function (event) {
 
 displaySearchHistory();
 searchForm.addEventListener('submit', newSearch);
-searchHistoryEl.addEventListener('click', function (event) {console.log('clicked ' + event.target.innerText)});
+searchHistoryEl.addEventListener('click', displayFromHistory);
