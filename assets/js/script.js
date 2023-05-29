@@ -11,8 +11,17 @@ var q = '';
 
 var searchHistory = JSON.parse(localStorage.getItem('searchHistory')) || [];
 
+
 //for every item saved in localStorage, create a link and display it on page.
 function displaySearchHistory() {
+
+    var searchHistoryHeaderEl = document.querySelector('#search-history-header')
+
+    if (searchHistory !== []) {
+
+        searchHistoryHeaderEl.className = '';
+        searchHistoryHeaderEl.className = 'd-block';
+    }
 
     for (let i = 0; i < searchHistory.length; i++) {
         var searchHistoryItem = document.createElement('a')
@@ -159,7 +168,6 @@ var newSearch = function (event) {
 
 function displayFromHistory(event) {
     q = event.target.innerText;
-    event.target.ClassName = 'active';
     search();
 }
 
