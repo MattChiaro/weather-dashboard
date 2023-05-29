@@ -8,6 +8,7 @@ var currentHumidityEl = document.querySelector('#current-humidity')
 var currentIconImageEl = document.querySelector('#current-icon-image')
 var searchHistoryEl = document.querySelector('#search-history')
 var q = '';
+var bigCard = document.querySelector('#big-card')
 
 var searchHistory = JSON.parse(localStorage.getItem('searchHistory')) || [];
 
@@ -110,6 +111,7 @@ function search() {
                                 var humidity = data.list[i].main.humidity;
                                 var icon = data.list[i].weather[0].icon;
 
+                                //build each individual card
                                 var cardTitleEl = document.createElement('h5');
                                 var cardIcon = document.createElement('img');
                                 var cardTempEl = document.createElement('p');
@@ -140,12 +142,20 @@ function search() {
                                 cardEl.appendChild(cardBodyEl);
                                 document.querySelector('.card-group').appendChild(cardEl);
 
-
-
-
-
-
-
+                                //change card background-color based on selected temperature rules
+                                if (temp > 80) {
+                                    cardBodyEl.className = 'card-body hot';
+                                } else if (temp >= 70 && temp < 80) {
+                                    cardBodyEl.className = 'card-body warm';
+                                } else if (temp > 60 && temp < 70) {
+                                    cardBodyEl.className = 'card-body less-warm';
+                                } else if (temp <= 60) {
+                                    cardBodyEl.className = 'card-body light-jacket';
+                                } else if (temp > 45 && temp < 60) {
+                                    cardBodyEl.className = 'card-body cold';
+                                } else if (temp <= 45) {
+                                    cardBodyEl.className = 'card-body freezing';
+                                }
 
                             }
                         })

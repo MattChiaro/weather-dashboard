@@ -1,0 +1,23 @@
+.hot {
+    background-color: #e35c6a;
+}
+
+.warm {
+    background-color: #f1aeb5;
+}
+
+.less-warm {
+    background-color: #f8d7d9;
+}
+
+.light-jacket {
+    background-color: #cfe1fe;
+}
+
+.cold {
+    background-color: #6ea7fd;
+}
+
+.freezing {
+    background-color: #3d8bfd;
+}
