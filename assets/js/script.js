@@ -20,7 +20,7 @@ function displaySearchHistory() {
 
 
     for (let i = 0; i < searchHistory.length; i++) {
-        var searchHistoryItem = document.createElement('a')
+        const searchHistoryItem = document.createElement('a')
         searchHistoryItem.className = 'list-group-item list-group-item-action'
         searchHistoryItem.textContent = searchHistory[i]
         searchHistoryEl.appendChild(searchHistoryItem)
@@ -163,7 +163,7 @@ function search() {
         })
 }
 
-var newSearch = function (event) {
+let newSearch = function (event) {
     event.preventDefault();
 
     q = qInput.value.trim();
